@@ -1,4 +1,4 @@
-import db from './src/db/db.js';
+import db from './src/config/db.config.js';
 import app from './src/app.js';
 
 const main = async () => {

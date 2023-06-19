@@ -1,21 +1,34 @@
 import express from 'express';
-import {createEstudiante, deleteEstudiante, getEstudianteById, getEstudiantes, updateEstudiante} from '../controllers/estudiantes.controller.js';
-import { createCursos, deleteCursos, getCursoBy, getCursos, updateCursos } from '../controllers/cursos.controller.js';
+import {createCuenta, deleteCuenta, getCuentaById, getCuentas, updateCuenta} from '../controllers/cuentas.controller.js';
+import { createUsuarios, deleteUsuarios, getUsuarioBy, getUsuarios, updateUsuarios } from '../controllers/usuarios.controller.js';
+import { getRegistro, deleteRegistro, getRegistroBy, createRegistro, updateRegistro } from '../controllers/registro_transacciones.controller.js';
+import { goHome } from '../controllers/test.controller.js';
+
 const router = express.Router()
 
-//Rutas para acceder a la tabla Estudiantes
-router.get('/estudiantes', getEstudiantes)
-router.get('/estudiantes/:id', getEstudianteById)
-router.post('/estudiantes', createEstudiante)
-router.put('/estudiantes/:id', updateEstudiante)
-router.delete('/estudiantes/:id', deleteEstudiante)
+//Rutas
+router.get('/', goHome)
 
-//Rutas para acceder a Cursos
-router.get('/cursos', getCursos)
-router.get('/cursos/:id', getCursoBy)
-router.post('/cursos', createCursos)
-router.put('/cursos/:id', updateCursos)
-router.delete('/cursos/:id', deleteCursos)
+//Endpoints para acceder a la tabla Cuentas
+router.get('/cuentas', getCuentas)
+router.get('/cuentas/:rut', getCuentaById)
+router.post('/cuentas', createCuenta)
+router.put('/cuentas/:n_cuenta', updateCuenta)
+router.delete('/cuentas/:n_cuenta', deleteCuenta)
+
+//Endpoints para acceder a Cursos
+router.get('/usuarios', getUsuarios)
+router.get('/usuarios/:rut', getUsuarioBy)
+router.post('/usuarios', createUsuarios)
+router.put('/usuarios/:rut', updateUsuarios)
+router.delete('/usuarios/:rut', deleteUsuarios)
+
+//Endpoints para acceder a Cursos
+router.get('/registros', getRegistro)
+router.get('/registros/:n_operacion', getRegistroBy)
+router.post('/registros', createRegistro)
+router.put('/registros/:n_operacion', updateRegistro)
+router.delete('/registros/:n_operacion', deleteRegistro)
 
 
 export default router

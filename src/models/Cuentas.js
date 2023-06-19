@@ -1,19 +1,18 @@
-import db from '../db/db.js'
+import db from '../config/db.config.js'
 
 
-class Estudiantes {
-    constructor(nombres, apellidos, edad, nro_identificacion) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.edad = edad;
-        this.nro_identificacion = nro_identificacion;
+class Cuenta {
+    constructor(rut, n_cuenta, tipo) {
+        this.rut = rut;
+        this.n_cuenta = n_cuenta;
+        this.tipo = tipo;
     }
 
     static findAll() {
         return new Promise(async (resolve, reject) => {
             try {               
                 let result = await db.query(
-                    "SELECT id, nombres, apellidos, edad, nro_identificacion FROM estudiantes"
+                    "SELECT rut, n_cuenta, tipo FROM cuentas"
                 );
                 resolve(result);
             } catch (error) {
@@ -23,12 +22,12 @@ class Estudiantes {
         });
     };
 
-    static findBy(id) {
+    static findBy(rut) {
         return new Promise(async (resolve, reject) => {
             try {               
                 let result = await db.query(
-                    "SELECT id, nombres, apellidos, edad, nro_identificacion FROM estudiantes where id = $1",
-                    [id]
+                    "SELECT rut, n_cuenta, tipo FROM cuentas where rut = $1",
+                    [rut]
                 );
                 resolve(result);
             } catch (error) {
@@ -38,12 +37,12 @@ class Estudiantes {
         });
     };
 
-    createEstudiante() {
+    create() {
         return new Promise(async (resolve, reject) => {
             try {
                 let query = {
-                    text: `INSERT INTO estudiantes(nombres, apellidos, edad, nro_identificacion) VALUES($1,$2,$3,$4) returning id, nombres, apellidos, edad, nro_identificacion`,
-                    values: [this.nombres, this.apellidos, this.edad, this.nro_identificacion],
+                    text: `INSERT INTO cuentas(rut, n_cuenta, tipo) VALUES($1,$2,$3) returning rut, n_cuenta, tipo`,
+                    values: [this.rut, this.n_cuenta, this.tipo],
                 };
                 let result = await db.query(query);
                 return resolve(result);
@@ -54,12 +53,12 @@ class Estudiantes {
         })
     };
 
-	static updateEstudiante(id, nombres, apellidos, edad, nro_identificacion) {
+	static update(rut, n_cuenta, tipo) {
 		return new Promise(async (resolve, reject) => {
             try {
                 let query = {
-                    text: 'UPDATE estudiantes SET nombres=$2, apellidos=$3, edad=$4, nro_identificacion=$5 WHERE id = $1',
-					values: [id, nombres, apellidos, edad, nro_identificacion],
+                    text: 'UPDATE cuentas SET rut=$1, tipo=$3 WHERE n_cuenta = $2',
+					values: [rut, n_cuenta, tipo],
 				};
 				let result = await db.query(query);
 				return resolve(result);
@@ -69,12 +68,12 @@ class Estudiantes {
 		});
 	}
 
-    static deleteEstudiante(id) {
+    static delete(n_cuenta) {
         return new Promise(async (resolve, reject)=>{
             try {
                 let query = {
-                    text:`DELETE FROM estudiantes WHERE id=$1`,
-                    values:[id],
+                    text:`DELETE FROM cuentas WHERE n_cuenta=$1`,
+                    values:[n_cuenta],
                 };
                 let result = await db.query(query);
                 return resolve (result);
@@ -85,4 +84,4 @@ class Estudiantes {
     }
 };
 
-export default Estudiantes;
+export default Cuenta;
