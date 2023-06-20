@@ -19,8 +19,8 @@ export const getRegistro = async (req, res) => {
 
 export const getRegistroBy = async (req, res) => {
     try {
-        let {n_operacion} = req.params
-        let result = await Registro.findBy(n_operacion)
+        let {buscador} = req.params
+        let result = await Registro.findBy(buscador)
         res.send({
             code:200,
             data:result.rows,

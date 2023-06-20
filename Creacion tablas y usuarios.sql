@@ -106,3 +106,20 @@ values
 select * from cuentas;
 select * from usuarios;
 select * from registro_transacciones;
+
+--paso 1: Primero dropeamos el seteo default
+ALTER TABLE registro_transacciones
+ALTER COLUMN n_operacion DROP DEFAULT;
+
+--paso 2: Luego creamos el nuevo tipo y seteo default
+ALTER TABLE registro_transacciones
+ALTER COLUMN n_operacion TYPE VARCHAR(6)
+    USING substr(uuid_generate_v4()::text, 1, 6);
+	
+--paso 3: agregamos un nuevo constraint
+ALTER TABLE registro_transacciones
+ALTER COLUMN n_operacion SET DEFAULT substr(uuid_generate_v4()::text, 1, 6);
+
+--Agregamos la columna Balance a la tabla cuentas
+ALTER TABLE cuentas
+ADD COLUMN balance MONEY DEFAULT 0;

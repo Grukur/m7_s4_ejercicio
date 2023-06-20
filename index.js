@@ -11,7 +11,7 @@ const main = async () => {
         let client = await db.connect()
         let result = await client.query('select now();');
         console.log(
-            'Conectado a la vase de datos, hora servidor: '
+            'Conectado a la base de datos, hora servidor: '
             );
             const PORT = 3000
             let servidor = app.listen(PORT)

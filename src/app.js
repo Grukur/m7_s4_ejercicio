@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { create } from 'express-handlebars';
+import exphbs from 'express-handlebars';
 import router from './routes/routes.js';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 // Create handlebars instance
-const hbs = create({
+const hbs = exphbs.create({
   partialsDir: [path.join(__dirname, 'views/partials')],
 });
 
@@ -26,11 +26,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(cors());
 
-// Publish the 'dist' folder of Bootstrap
-app.use("/bootstrap", express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
-
 // Publish the 'public' folder
 app.use(express.static('public'));
+
+// Publish the 'dist' folder of Bootstrap
+app.use("/bootstrap", express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
 // ROUTES
 app.use('/api/', router);

@@ -18,10 +18,11 @@ export const getCuentas = async (req, res) => {
     }
 }
 
-export const getCuentaById = async (req, res) => {
+export const getCuentaBy = async (req, res) => {
     try {
-        let { id } = req.params
-        let cuenta = await Cuenta.findBy(id);
+        let { buscador } = req.params
+        console.log(buscador)
+        let cuenta = await Cuenta.findBy(buscador);
         res.send({
             code: 200,
             data: cuenta.rows,
@@ -37,8 +38,8 @@ export const getCuentaById = async (req, res) => {
 
 export const createCuenta = async (req, res) => {
     try {
-        let { rut, n_cuenta, tipo } = req;
-        let nuevaCuenta = new Cuenta(rut, n_cuenta, tipo);
+        let { rut, n_cuenta, tipo, balance } = req.body;
+        let nuevaCuenta = new Cuenta(rut, n_cuenta, tipo, balance);
         let result = await nuevaCuenta.create()
         res.send({
             code:200,
@@ -56,8 +57,8 @@ export const createCuenta = async (req, res) => {
 export const updateCuenta = async (req, res) => {
     try {
         let {n_cuenta} = req.params;
-        let { rut, tipo } = req.body;
-        let result = await Cuenta.update(rut, n_cuenta, tipo)
+        let { rut, tipo, balance } = req.body;
+        let result = await Cuenta.update(rut, n_cuenta, tipo, balance)
         res.send({
             code:200,
             data:result.rows,
