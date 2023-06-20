@@ -37,7 +37,7 @@ export const getCuentaById = async (req, res) => {
 
 export const createCuenta = async (req, res) => {
     try {
-        let { rut, n_cuenta, tipo } = req.body;
+        let { rut, n_cuenta, tipo } = req;
         let nuevaCuenta = new Cuenta(rut, n_cuenta, tipo);
         let result = await nuevaCuenta.create()
         res.send({

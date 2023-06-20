@@ -1,15 +1,14 @@
 import db from '../config/db.config.js'
 
 class Registro {
-    constructor(rut, clave, nombre, primer_apellido, segundo_apellido, fecha_nacimiento, email, telefono) {
+    constructor(n_operacion, rut, n_cuenta, detalle_operacion, fecha, abonos, cargos) {
+        this.n_operacion = n_operacion;
         this.rut = rut;
-        this.clave = clave;
-        this.nombre = nombre;
-        this.primer_apellido = primer_apellido;
-        this.segundo_apellido = segundo_apellido;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.email = email;
-        this.telefono = telefono;
+        this.n_cuenta = n_cuenta;
+        this.detalle_operacion = detalle_operacion;
+        this.fecha = fecha;
+        this.abonos = abonos || 0;
+        this.cargos = cargos || 0;
     }
 
     static findAll() {
@@ -28,6 +27,7 @@ class Registro {
     }
 
     static findBy(n_operacion) {
+        console.log(n_operacion)
         return new Promise(async (resolve, reject) => {
             try {
                 let query = {
@@ -54,7 +54,6 @@ class Registro {
                     };
                     resultado = await db.query(query);                    
                 }else if(cargos){
-                    console.log('cargo')
                     let query = {
                         text: `INSERT INTO registro_transacciones(rut, n_cuenta, detalle_operacion, cargos) VALUES($1,$2,$3,$4) returning n_operacion, rut, n_cuenta, detalle_operacion, fecha, abonos, cargos, balance`,
                         values: [rut, n_cuenta, detalle_operacion, cargos],
@@ -76,8 +75,8 @@ class Registro {
             try {
                 await db.query('BEGIN');
                 let query = {
-                    text: 'UPDATE registro_transacciones SET rut=$2, n_cuenta=$3, detalle_operacion=$4, abonos=$5, cargos=$6, balance=$7 WHERE n_operacion = $1',
-					values: [n_operacion, rut, n_cuenta, detalle_operacion, abonos, cargos, balance],
+                    text: 'UPDATE registro_transacciones SET rut=$2, n_cuenta=$3, detalle_operacion=$4, abonos=$5, cargos=$6 WHERE n_operacion = $1',
+					values: [n_operacion, rut, n_cuenta, detalle_operacion, abonos, cargos],
 				};
 				let resultado = await db.query(query);
                 await db.query('COMMIT');

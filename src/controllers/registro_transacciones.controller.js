@@ -8,7 +8,7 @@ export const getRegistro = async (req, res) => {
             status:200,
             data:registro.rows,
             message:'Registro obtenidos con exito'
-        }).render('home')
+        })
     } catch(error) {
         if(error.code){
             let messageError = returnError(error);
@@ -19,8 +19,8 @@ export const getRegistro = async (req, res) => {
 
 export const getRegistroBy = async (req, res) => {
     try {
-        let {rut} = req.params
-        let result = await Registro.findBy(rut)
+        let {n_operacion} = req.params
+        let result = await Registro.findBy(n_operacion)
         res.send({
             code:200,
             data:result.rows,
