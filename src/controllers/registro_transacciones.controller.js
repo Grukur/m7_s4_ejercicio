@@ -71,8 +71,8 @@ export const updateRegistro = async (req, res) => {
 }
 export const deleteRegistro = async (req, res) => {
     try {
-        let {rut} = req.params
-        let result = await Registro.delete(rut)
+        let {n_operacion} = req.params
+        let result = await Registro.delete(n_operacion)
         res.send({
             code:200,
             data:result.rows,

@@ -88,13 +88,13 @@ class Registro {
 		});
 	}
 
-    static delete(rut) {
+    static delete(n_operacion) {
         return new Promise(async (resolve, reject)=>{
             try {
                 await db.query('BEGIN');
                 let query = {
-                    text:`DELETE FROM registro_transacciones WHERE rut=$1`,
-                    values:[rut],
+                    text:`DELETE FROM registro_transacciones WHERE n_operacion=$1`,
+                    values:[n_operacion],
                 };
                 let resultado = await db.query(query);
                 await db.query('COMMIT');
