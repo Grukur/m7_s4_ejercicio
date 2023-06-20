@@ -1,5 +1,10 @@
 import db from './src/config/db.config.js';
 import app from './src/app.js';
+import { goHome } from './src/controllers/test.controller.js';
+
+
+//Rutas
+app.get(['/', '/home'], goHome)
 
 const main = async () => {
     try {

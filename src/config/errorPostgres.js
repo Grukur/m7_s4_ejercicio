@@ -10,6 +10,7 @@ const returnError = (error) => {
         "28P01": "Credenciales de acceso a la BD incorrectas",
         "ECONNREFUSED": "error de conexion, revise la configuracion de su conexion",
         "ENOTFOUND": "Ha fallado la conexion al host",
+        "ENOENT": "no such file or directory, open 'D:\JavaScript\m7\m7_s4_ejercicios\src\views\layouts\main.handlebars'",
         "08003": "connection_does_not_exist",
         "08006": "connection_failure",
         "2F002": "modifying_sql_data_not_permitted",

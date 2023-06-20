@@ -1,10 +1,36 @@
-<footer class="py-5 text-center mx-auto">
-    <p><span class="fw-bold">Realizado por: </span>Darold K. Trench</p>
-    <p class="small">https://github.com/Grukur<i class="bi bi-r-circle"></i></p>
+<footer class="">
+    <div class="bkg">
+        <p><span class="fw-bold">Realizado por: </span>Darold K. Trench</p>
+        <a class="small" href="https://github.com/Grukur" target="_blank">
+            <p>GitHub</p>
+        </a>
+        <a class="small" href="https://www.linkedin.com/in/darold-trench-mancini/" target="_blank">
+            <p>Linkedin</p>
+        </a>
+    </div>
 </footer>
 
 <style>
+    a {
+        color: rgb(255, 255, 255);
+    }
+
     footer {
-        background-color: #FFB3BB;
+        color: white;
+    }
+    span{
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+  padding: 10px;
+        
+    }
+
+    .bkg{
+        background-image: url('/banner.jfif');
+        background-size: cover;
+        height: 12rem;
+        background-position: 50%;
+        text-align: center;
     }
 </style>

@@ -1,13 +1,10 @@
 import express from 'express';
-import {createCuenta, deleteCuenta, getCuentaById, getCuentas, updateCuenta} from '../controllers/cuentas.controller.js';
+
+import { createCuenta, deleteCuenta, getCuentaById, getCuentas, updateCuenta } from '../controllers/cuentas.controller.js';
 import { createUsuarios, deleteUsuarios, getUsuarioBy, getUsuarios, updateUsuarios } from '../controllers/usuarios.controller.js';
 import { getRegistro, deleteRegistro, getRegistroBy, createRegistro, updateRegistro } from '../controllers/registro_transacciones.controller.js';
-import { goHome } from '../controllers/test.controller.js';
 
 const router = express.Router()
-
-//Rutas
-router.get('/', goHome)
 
 //Endpoints para acceder a la tabla Cuentas
 router.get('/cuentas', getCuentas)
